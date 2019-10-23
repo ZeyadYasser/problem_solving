@@ -1,16 +1,33 @@
-//-Modular exponent( B^P MOD M ): #O(LOG(P))
-unsigned int mod_pow(unsigned int b, unsigned int p , unsigned int m){
-    if(p == 0)
-        return 1;
-    else if(p == 1)
-        return b%m;
-    else if(p%2 == 0){
-        unsigned int x = mod_pow(b, p/2, m) % m;
-        return (x*x)%m;
+//-Modular exponent( k^p MOD mod ): #O(LOG(P))
+ll mod_exp(ll k, ll p, ll mod)
+{
+    if(p == 0) return 1;
+    if(p == 1) return k;
+    if(p&1) {
+        return ((k % mod) * (mod_exp(k, p-1, mod))) % mod;
+    } else {
+        ll t = mod_exp(k, p/2, mod);
+        return (t*t) % mod;
     }
-    else{
-        return ((b%m) * mod_pow(b, p-1, m)) % m;
+}
+
+bool probablyPrimeFermat(int n, int iter=5) {
+    if (n < 4)
+        return n == 2 || n == 3;
+
+	mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+    for (int i = 0; i < iter; i++) {
+        int a = 2 + rng() % (n - 3);
+        if (mod_exp(a, n - 1, n) != 1)
+            return false;
     }
+    return true;
+}
+
+//-Huge Modular exponent( a^(b^c) MOD mod ): #O(LOG(P))
+ll huge_mod_exp(ll a, ll b, ll c, ll mod)
+{
+    return mod_exp(a, mod_exp(b, c, mod - 1), mod);
 }
 
 //-Newton’s method(finds roots of any fn. easily):

@@ -30,6 +30,8 @@ int main() {
     //freopen("out.txt", "w", stdout);
     fastInOut();
 
+	mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());	
+	
     return 0;
 }
 

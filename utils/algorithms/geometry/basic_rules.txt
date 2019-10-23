@@ -1,0 +1,25 @@
+PI = acos(-1)
+
+##### Triangles #####
+
+// if you have 3 sides
+COS(a) = (b*b + c*c - a*a)/(2*b*c)
+
+// triangle area
+s = (a+b+c)/2.0
+triangle_area = sqrt(s*(s-a)(s-b)(s-c))
+
+// triangle area from coords
+abs(0.5*(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2)))
+
+// Circumcircle radius (circle enclosing a triangle) of sides a, b, c
+r = (abc)/(4*triangle_area)
+
+// Inscribed circle radius (tri_area = 0.5 * r * tri_perimeter)
+triangle_area = sqrt(s*(s-a)(s-b)(s-c))
+r = 2 * (triangle_area/(a+b+c))
+
+
+##### Regular Polygons #####
+
+angle = (180*(n-2))/n
